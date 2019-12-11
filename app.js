@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/cards', (req, res) => {
+    res.render('cards', { prompt: "Who is buried in Grant's tomb?", hint: "Think about who's tomb it is."});
+});
+
 app.get('/about', (req, res) => {
     res.send('<h1>About Me</h1>');
 });

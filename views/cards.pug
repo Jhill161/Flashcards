@@ -6,6 +6,14 @@ html(lang="en")
         header
             h1 Flash Cards
         section#content
-            h2 Welcome, Student!
+            h2= prompt
+            if hint
+                p
+                    i Hint: #{hint}
         footer
             p An App to help one Study 
+
+
+// use include filename.pug, to include another template on current line
+// use extend filename.pug to extend that template to another template, needs to use 'block content' to specify content
+// can iterate through an array via 'each color in colors', or 'each item in list'
