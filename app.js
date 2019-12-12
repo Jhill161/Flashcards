@@ -1,5 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 
 app.set('view engine', 'pug');
 
@@ -8,12 +13,38 @@ app.listen(3000, () => {
 });
 
 // .render() method will 'render' the pug html file.
+// .redirect() method redirects 
 app.get('/', (req, res) => {
-    res.render('index');
+    const name = req.cookies.username;
+    if (name) {
+        res.render('index', {name});
+    } else {
+        res.redirect('/hello');
+    };
 });
 
 app.get('/cards', (req, res) => {
     res.render('cards', { prompt: "Who is buried in Grant's tomb?", hint: "Think about who's tomb it is."});
+});
+
+app.post('/hello', (req, res) => {
+    res.cookie('username', req.body.username);
+    res.redirect('/');
+});
+
+app.post('/goodbye', (req, res) => {
+    res.clearCookie('username');
+    res.redirect('/hello')
+});
+
+// if you declare req.cookies.username, you can simply use {name} instead of {name: req.cookies.username}
+app.get('/hello', (req, res) => {
+    const name = req.cookies.username;
+    if (name) {
+        res.redirect('/');
+    } else {
+        res.render('hello');
+    }
 });
 
 app.get('/about', (req, res) => {
