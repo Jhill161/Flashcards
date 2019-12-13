@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cards', (req, res) => {
-    res.render('cards');
+    res.render('cards', {prompt: "Test", hint: "hint"});
 });
 
 app.post('/hello', (req, res) => {

@@ -1,19 +1,14 @@
-doctype html
-html(lang="en")
-    head
-        title Flash Cards
-    body
-        header
-            h1 Flash Cards
-        section#content
-            h2= prompt
-            if hint
-                p
-                    i Hint: #{hint}
-        footer
-            p An App to help one Study 
+extends layout
+block content
+    section#content
+        h2= text
+        if hint
+            p
+                i Hint: #{hint}
+        a(href=`${id}?side=${sideToShow}`)= sideToShowDisplay
+        br
+        a(href='/cards') Next Card
 
-
-// use include filename.pug, to include another template on current line
-// use extend filename.pug to extend that template to another template, needs to use 'block content' to specify content
-// can iterate through an array via 'each color in colors', or 'each item in list'
+//- // use include filename.pug, to include another template on current line
+//- // use extend filename.pug to extend that template to another template, needs to use 'block content' to specify content
+//- // can iterate through an array via 'each color in colors', or 'each item in list'
