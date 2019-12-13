@@ -8,6 +8,13 @@ app.use(cookieParser());
 
 app.set('view engine', 'pug');
 
+const mainRoutes = require('./routes')
+const cardRoutes = require('./routes/cards')
+
+app.use(mainRoutes);
+app.use('/cards', cardRoutes)
+
+
 app.listen(3000, () => {
     console.log('The application is running on localhost:3000!');
 });
@@ -24,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cards', (req, res) => {
-    res.render('cards', { prompt: "Who is buried in Grant's tomb?", hint: "Think about who's tomb it is."});
+    res.render('cards');
 });
 
 app.post('/hello', (req, res) => {
